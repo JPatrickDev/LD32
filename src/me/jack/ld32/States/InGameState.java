@@ -1,5 +1,6 @@
 package me.jack.ld32.States;
 
+import me.jack.ld32.Entity.BasicEnemy;
 import me.jack.ld32.Level.Level;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -17,6 +18,8 @@ public class InGameState extends BasicGameState {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+        gameContainer.setAlwaysRender(true);
+        gameContainer.setUpdateOnlyWhenVisible(false);
         start();
     }
 
@@ -31,13 +34,14 @@ public class InGameState extends BasicGameState {
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
-
+        level.update();
     }
 
 
     public void start() throws SlickException {
         level = new Level(25, 15);
         level.loadFromImg("/res/level.png");
+        level.entities.add(new BasicEnemy(level.path));
     }
 
     @Override

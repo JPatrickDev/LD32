@@ -93,10 +93,6 @@ public class Path {
         return new Path(points.toArray(pointsArray));
     }
 
-    private static void finalPoint(int x, int y, ArrayList<Point> points) {
-
-    }
-
     public static boolean visited(Point p, ArrayList<Point> points){
         for(Point pp : points){
             if(pp.x == p.x && pp.y == p.y){

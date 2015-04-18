@@ -5,3 +5,12 @@ Entity
     - Entity system
     - Entities can follow the path
         - Loop through the level and detect the path when the level is loaded /
+
+Rounds
+    - Round based
+    - No time-limit on a round, wait until all enemies from the current round are dead before starting the next one /
+
+
+Towers
+    - Able to place towers in the level
+    - Can't place them over the path

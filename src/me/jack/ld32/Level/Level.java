@@ -1,5 +1,8 @@
 package me.jack.ld32.Level;
 
+import me.jack.ld32.Entity.BasicEnemy;
+import me.jack.ld32.Entity.Entity;
+import me.jack.ld32.Entity.PathFollowingEntity;
 import me.jack.ld32.Level.Tile.Tile;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -7,6 +10,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 import java.awt.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Created by Jack on 18/04/2015.
@@ -15,9 +19,14 @@ public class Level {
 
     private int width, height;
     private int[][] tiles;
-    private Path path;
+    public Path path;
 
     public static final int tileSize = 32;//8 might be too small
+
+
+    public CopyOnWriteArrayList<Entity> entities  = new CopyOnWriteArrayList<Entity>();
+
+    public int round = 0;
 
     public Level(int width, int height) {
         this.width = width;
@@ -28,7 +37,6 @@ public class Level {
                 if (x % 2 == 0 && y%2 == 0) {
                     setTileAt(x,y,1);
                 }
-
             }
         }
     }
@@ -51,6 +59,11 @@ public class Level {
         path = Path.generatePath(this);
     }
 
+    public int calculateEnemies(){
+        int i = round * 2;
+        System.out.println("Round: " + round + " i " + i);
+        return i;
+    }
     public void render(Graphics g) {
         for (int x = 0; x != width; x++) {
             for (int y = 0; y != height; y++) {
@@ -64,6 +77,45 @@ public class Level {
         for(Point p :path.getPath()){
             g.fillRect(p.x*tileSize,p.y*tileSize,tileSize,tileSize);
         }
+
+        for(Entity e : entities){
+            e.render(g);
+        }
+    }
+
+    int toSpawn = 0;
+    int spawnWait = 0;
+
+    public void update(){
+        for(Entity e : entities){
+            e.update(this);
+        }
+        boolean roundOver = checkRoundOver();
+        if(roundOver && toSpawn== 0){
+            round++;
+            toSpawn = calculateEnemies();
+        }
+
+        //System.out.println(toSpawn);
+            if(toSpawn != 0){
+          spawnWait++;
+            if(spawnWait > 30 && Math.random() > 0.25){
+                spawnWait = 0;
+                toSpawn--;
+                entities.add(new BasicEnemy(path));
+            }
+        }
+    }
+
+    private boolean checkRoundOver() {
+        boolean i = true;
+        for(Entity e : entities){
+            if(e instanceof PathFollowingEntity){
+                i = false;
+                break;
+            }
+        }
+        return i;
     }
 
     public boolean solid(int x,int y){

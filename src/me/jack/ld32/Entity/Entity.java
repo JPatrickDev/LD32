@@ -8,7 +8,7 @@ import org.newdawn.slick.Graphics;
  */
 public abstract class Entity {
 
-    private int x, y;
+    protected int x, y;
 
     public Entity(int x, int y) {
         this.x = x;
@@ -17,4 +17,12 @@ public abstract class Entity {
 
     public abstract void render(Graphics g);
     public abstract void update(Level level);
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 }
