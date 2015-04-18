@@ -6,6 +6,7 @@ import me.jack.ld32.Entity.EntityProjectile;
 import me.jack.ld32.Entity.PathFollowingEntity;
 import me.jack.ld32.Entity.Towers.Tower;
 import me.jack.ld32.Level.Tile.Tile;
+import me.jack.ld32.Upgrades.Upgrade;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -207,5 +208,15 @@ public class Level {
 
     public void addEntity(Entity entity) {
         entities.add(entity);
+    }
+
+    public void applyUpgrade(Upgrade selectedUpgrade,Tower tower) {
+        for(Entity e : entities){
+            if(e instanceof  Tower){
+                Tower t = (Tower) e;
+                if(t.name.equals(tower.name))
+                t.upgrade(selectedUpgrade);
+            }
+        }
     }
 }

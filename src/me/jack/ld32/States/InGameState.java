@@ -1,9 +1,9 @@
 package me.jack.ld32.States;
 
 import me.jack.ld32.Entity.BasicEnemy;
-import me.jack.ld32.Entity.Towers.ToasterTower;
 import me.jack.ld32.Entity.Towers.Tower;
 import me.jack.ld32.Level.Level;
+import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
@@ -16,6 +16,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class InGameState extends BasicGameState {
 
     Level level;
+    private boolean viewUpgrades = false;
 
 
     @Override
@@ -28,6 +29,14 @@ public class InGameState extends BasicGameState {
     Color goodPlacement = new Color(50, 255, 0, 100);
     Color badPlacement = new Color(255, 100, 100, 100);
     int i = 0;
+
+    public static void increaseCost(Tower tower,float increase){
+        for(Tower t : Tower.towers){
+            if(t.name.equals(tower.name)){
+                t.cost+=increase;
+            }
+        }
+    }
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics g) throws SlickException {
@@ -99,8 +108,22 @@ public class InGameState extends BasicGameState {
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
         level.update();
+        if(viewUpgrades){
+            UpgradesState.parent= level;
+            stateBasedGame.enterState(1);
+            viewUpgrades = false;
+        }
 
 
+    }
+
+
+    @Override
+    public void keyPressed(int key, char c) {
+        super.keyPressed(key, c);
+        if(key == Keyboard.KEY_U){
+            viewUpgrades = true;
+        }
     }
 
     @Override

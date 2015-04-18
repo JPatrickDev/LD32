@@ -2,6 +2,7 @@ package me.jack.ld32.Entity.Towers;
 
 import me.jack.ld32.Entity.Entity;
 import me.jack.ld32.Level.Level;
+import me.jack.ld32.Upgrades.Upgrade;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -10,6 +11,7 @@ import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Shape;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Jack on 18/04/2015.
@@ -22,15 +24,18 @@ public abstract class Tower extends Entity {
     public Image icon;
     public static ArrayList<Tower> towers = new ArrayList<Tower>();
 
+    public ArrayList<Upgrade> upgrades = new ArrayList<Upgrade>();
+    public static HashMap<String, ArrayList<Upgrade>> appliedUpgrades = new HashMap<String, ArrayList<Upgrade>>();
+
     static {
         towers.add(new ToasterTower(-1, -1));
     }
 
     public float cost;
 
-    public String name,description;
+    public String name, description;
 
-    public Tower(int x, int y, int attackRadius, int iconX, int iconY, float cost,String name, String description) {
+    public Tower(int x, int y, int attackRadius, int iconX, int iconY, float cost, String name, String description) {
         super(x, y);
         if (icons == null) {
             try {
@@ -45,6 +50,12 @@ public abstract class Tower extends Entity {
 
         this.name = name;
         this.description = description;
+        if (keyFound(name)) {
+            for (Upgrade appliedUpgrade : appliedUpgrades.get(name)) {
+                System.out.println("Applying upgrade " + appliedUpgrade.getTitle());
+                appliedUpgrade.apply(this);
+            }
+        }
     }
 
     public static Tower create(int tX, int tY, Tower holding) {
@@ -53,4 +64,32 @@ public abstract class Tower extends Entity {
         }
         return null;
     }
+
+    public void upgrade(Upgrade selectedUpgrade) {
+        System.out.println("Upgrading");
+        upgrades.remove(selectedUpgrade);
+        selectedUpgrade.apply(this);
+
+    }
+
+    public static void setApplied(Upgrade selectedUpgrade,Tower type){
+
+        if (keyFound(type.name)) {
+            System.out.println("Key found");
+            appliedUpgrades.get(type.name).add(selectedUpgrade);
+        } else {
+            System.out.println("No key found");
+            appliedUpgrades.put(type.name, new ArrayList<Upgrade>());
+            appliedUpgrades.get(type.name).add(selectedUpgrade);
+        }
+    }
+
+    public static boolean keyFound(String key){
+        for(String kk : appliedUpgrades.keySet()){
+            if(kk.equals(key))
+                return true;
+        }
+        return false;
+    }
+
 }

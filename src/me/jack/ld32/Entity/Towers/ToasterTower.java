@@ -6,6 +6,8 @@ import me.jack.ld32.Entity.Projectile.Projectile;
 import me.jack.ld32.Entity.Projectile.ToasterProjectile;
 import me.jack.ld32.Level.Level;
 import me.jack.ld32.Level.Tile.Tile;
+import me.jack.ld32.Upgrades.Toaster.FireRateUpgrade;
+import me.jack.ld32.Upgrades.Toaster.ToasterPowerUpgradeOne;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
@@ -19,10 +21,13 @@ public class ToasterTower extends Tower {
 
     private int width, height;
 
+    public static float damage = 0.5f;
     public ToasterTower(int x, int y) {
         super(x, y, 3 * Level.tileSize, 0, 0, 100f,"Toaster Tower","Throws toasters");
         this.width = 1;
         this.height = 1;
+        upgrades.add(new FireRateUpgrade());
+        upgrades.add(new ToasterPowerUpgradeOne());
     }
 
     Color attackCircleColor = new Color(255,0,0,5);
@@ -50,7 +55,7 @@ public class ToasterTower extends Tower {
         if(wait <= 20)return;
         wait = 0;
 
-        ToasterProjectile tP = new ToasterProjectile();
+        ToasterProjectile tP = new ToasterProjectile(damage);
         EntityProjectile projectile = new EntityProjectile(getX(),getY(),target.getX(),target.getY(),tP);
         level.addEntity(projectile);
     }

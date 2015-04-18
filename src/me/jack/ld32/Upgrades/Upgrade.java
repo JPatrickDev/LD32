@@ -1,5 +1,6 @@
 package me.jack.ld32.Upgrades;
 
+import me.jack.ld32.Entity.Towers.Tower;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
@@ -7,7 +8,7 @@ import org.newdawn.slick.SpriteSheet;
 /**
  * Created by Jack on 18/04/2015.
  */
-public class Upgrade {
+public abstract class Upgrade {
 
     private String title;
     private String description;
@@ -16,8 +17,9 @@ public class Upgrade {
     private Image icon;
 
     public static SpriteSheet upgradeIconSpriteSheet;
+    private float cost;
 
-    public Upgrade(String title, String description, int activationLevel,int costIncrease, int tX,int tY) {
+    public Upgrade(String title, String description, int activationLevel,int costIncrease, int tX,int tY,float cost) {
         this.title = title;
         this.description = description;
         this.activationLevel = activationLevel;
@@ -30,6 +32,7 @@ public class Upgrade {
         }
         icon = upgradeIconSpriteSheet.getSprite(tX,tY);
         this.costIncrease = costIncrease;
+        this.cost = cost;
     }
 
     public String getTitle() {
@@ -51,5 +54,11 @@ public class Upgrade {
 
     public int getCostIncrease() {
         return costIncrease;
+    }
+
+    public abstract void apply(Tower tower);
+
+    public float getCost() {
+        return cost;
     }
 }

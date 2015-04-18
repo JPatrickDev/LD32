@@ -2,12 +2,12 @@
     - Tile based level/
     - Solid and passable tiles/
 Entity
-    - Entity system
-    - Entities can follow the path
+    - Entity system/
+    - Entities can follow the path/
         - Loop through the level and detect the path when the level is loaded /
 
 Rounds
-    - Round based
+    - Round based/
     - No time-limit on a round, wait until all enemies from the current round are dead before starting the next one /
         - User presses a button to start next round
 
@@ -16,17 +16,52 @@ Towers
     - Able to place towers in the level /
     - Can't place them over the path /
 
+    - 3-4 tower types
+        - all with upgrades
+
 Exp
     - Exp dropped for killing/
-    - Exp can be used to upgrade towers
+    - Exp can be used to upgrade towers/
         - Have to upgrade each tower indiviually?
-        - All towers of same type upgrade when you upgrade one?
+        - All towers of same type upgrade when you upgrade one?/
     - Level based Exp, Level 1 has the default towers, 2 has new unlocks
         - Takes more exp to get to 2-3 than 1-2/
 
 Money
     - Money dropped for kills/
     - Used to purchase the towers/
-    - Price of a tower increases as you upgrade?
-        - Only if all towers are upgraded when you upgrade one
+    - Price of a tower increases as you upgrade? /
+        - Only if all towers are upgraded when you upgrade one/
 
+Balance
+    - Different enemy types
+        - Health and speed increase
+
+Graphics
+    - All towers need textures
+    - Enemies need textures
+    - Upgrades GUI needs texturing
+    - All towers need icons
+
+Sound
+    - Sound effects
+    - FL studios?
+
+
+Levels
+    - Two or three levels, randomly picked when the game starts?
+
+Main menu
+
+Difficulty settings
+
+Game over if lives reaches 0
+
+Plan for final day:
+
+8-10
+    - Add new tower types, start adding upgrades for them
+10-12
+    - Finish up tower types, start on new enemy types
+12-2
+    - Balancing the game.

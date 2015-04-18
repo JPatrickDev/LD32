@@ -17,7 +17,7 @@ public class LD32Game extends StateBasedGame{
 
     @Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
-        addState(new UpgradesState());
         addState(new InGameState());
+        addState(new UpgradesState());
     }
 }
