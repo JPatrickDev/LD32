@@ -1,0 +1,18 @@
+Theme: An Unconventional Weapon
+
+
+
+Tower Defence?
+    - Towers shoot household objects?
+        - Toaster gun
+        - Keyboard gun
+        - Ect
+    - Largely level-up based system.
+        - Upgrading towers
+            - Toaster Gun eg:
+                - Level 1, basic "Cheap" toaster
+                - Level 5 - Expensive steel toaster
+        - EXP unlocks new levels
+    - PARTICLES
+    - Random generation with the map?
+        -DFS Maze algorithm could make something?
