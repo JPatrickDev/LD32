@@ -28,7 +28,9 @@ public abstract class Tower extends Entity {
 
     public float cost;
 
-    public Tower(int x, int y, int attackRadius, int iconX, int iconY, float cost) {
+    public String name,description;
+
+    public Tower(int x, int y, int attackRadius, int iconX, int iconY, float cost,String name, String description) {
         super(x, y);
         if (icons == null) {
             try {
@@ -40,6 +42,9 @@ public abstract class Tower extends Entity {
         icon = icons.getSprite(iconX, iconY);
         attackCircle = new Circle(x + Level.tileSize / 2, y + Level.tileSize / 2, attackRadius);
         this.cost = cost;
+
+        this.name = name;
+        this.description = description;
     }
 
     public static Tower create(int tX, int tY, Tower holding) {

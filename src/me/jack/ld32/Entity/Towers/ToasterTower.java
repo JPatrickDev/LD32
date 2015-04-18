@@ -20,7 +20,7 @@ public class ToasterTower extends Tower {
     private int width, height;
 
     public ToasterTower(int x, int y) {
-        super(x, y, 3 * Level.tileSize, 0, 0, 100f);
+        super(x, y, 3 * Level.tileSize, 0, 0, 100f,"Toaster Tower","Throws toasters");
         this.width = 1;
         this.height = 1;
     }
@@ -28,6 +28,7 @@ public class ToasterTower extends Tower {
     Color attackCircleColor = new Color(255,0,0,5);
     @Override
     public void render(Graphics g) {
+        g.setLineWidth(5f);
         g.setColor(Color.orange);
 
         g.fillRect(x, y, Level.tileSize * width, height * Level.tileSize);

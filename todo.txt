@@ -9,6 +9,7 @@ Entity
 Rounds
     - Round based
     - No time-limit on a round, wait until all enemies from the current round are dead before starting the next one /
+        - User presses a button to start next round
 
 
 Towers
@@ -16,12 +17,12 @@ Towers
     - Can't place them over the path /
 
 Exp
-    - Exp dropped for killing
+    - Exp dropped for killing/
     - Exp can be used to upgrade towers
         - Have to upgrade each tower indiviually?
         - All towers of same type upgrade when you upgrade one?
     - Level based Exp, Level 1 has the default towers, 2 has new unlocks
-        - Takes more exp to get to 2-3 than 1-2
+        - Takes more exp to get to 2-3 than 1-2/
 
 Money
     - Money dropped for kills/

@@ -35,6 +35,7 @@ public class BasicEnemy extends PathFollowingEntity {
             level.removeEntity(this);
             if(health <= 0){
                 level.money+=25;
+                level.updateExp(20);
             }
             return;
         }

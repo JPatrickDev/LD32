@@ -36,6 +36,8 @@ public class Level {
     public int lives = 50;
 
     public float money = 200.0f;
+    public int exp = 0;
+    public int level = 1;
 
     public Level(int width, int height) {
         this.width = width;
@@ -48,6 +50,10 @@ public class Level {
                 }
             }
         }
+    }
+
+    public static int expForLevel(int level) {
+        return 2 ^ level * 5 + 150;
     }
 
     public void loadFromImg(String img) throws SlickException {
@@ -68,6 +74,14 @@ public class Level {
         path = Path.generatePath(this);
     }
 
+    public void updateExp(int add){
+        System.out.println("EXP: " + exp + "   Exp for level " + expForLevel(level));
+        exp+=add;
+        if(exp >= expForLevel(level)){
+            exp = 0;
+            level++;
+        }
+    }
     public int calculateEnemies() {
         int i = round * 2;
         System.out.println("Round: " + round + " i " + i);
@@ -85,7 +99,7 @@ public class Level {
         }
         g.setColor(Color.white);
         for (Point p : path.getPath()) {
-         //   g.fillRect(p.x * tileSize, p.y * tileSize, tileSize, tileSize);
+            //   g.fillRect(p.x * tileSize, p.y * tileSize, tileSize, tileSize);
         }
 
         for (Entity e : entities) {
@@ -129,10 +143,10 @@ public class Level {
     }
 
     public boolean placeTower(Tower tower) {
-        if (!solid((int)(tower.getX() / tileSize),(int)( tower.getY() / tileSize))) return false;
-        for(Entity e : entities){
-            if(e instanceof Tower){
-                if(e.getX() == tower.getX() && e.getY() == tower.getY()){
+        if (!solid((int) (tower.getX() / tileSize), (int) (tower.getY() / tileSize))) return false;
+        for (Entity e : entities) {
+            if (e instanceof Tower) {
+                if (e.getX() == tower.getX() && e.getY() == tower.getY()) {
                     return false;
                 }
             }
@@ -145,7 +159,7 @@ public class Level {
 
     public boolean solid(int x, int y) {
         Tile tile = Tile.tileLookup.get(getTileAt(x, y));
-        if(tile == null)return false;
+        if (tile == null) return false;
         return tile.isSolid();
     }
 

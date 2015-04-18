@@ -1,6 +1,7 @@
 package me.jack.ld32;
 
 import me.jack.ld32.States.InGameState;
+import me.jack.ld32.States.UpgradesState;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
@@ -16,6 +17,7 @@ public class LD32Game extends StateBasedGame{
 
     @Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
+        addState(new UpgradesState());
         addState(new InGameState());
     }
 }
