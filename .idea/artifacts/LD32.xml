@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="LD32">
+    <output-path>$PROJECT_DIR$/out/artifacts/LD32</output-path>
+    <root id="archive" name="LD32.jar">
+      <element id="module-output" name="LD32" />
+      <element id="dir-copy" path="$PROJECT_DIR$/../LD32 - JBox2dtesting/res" />
+    </root>
+  </artifact>
+</component>

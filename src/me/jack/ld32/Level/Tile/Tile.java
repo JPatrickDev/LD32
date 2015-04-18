@@ -2,6 +2,8 @@ package me.jack.ld32.Level.Tile;
 
 import me.jack.ld32.Level.Level;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 import java.util.HashMap;
 
@@ -12,7 +14,7 @@ public abstract class Tile {
 
     public static int idCount = 0;
     public static HashMap<Integer, Tile> tileLookup = new HashMap<Integer, Tile>();
-
+    public static SpriteSheet tileSheet = null;
     static {
         new GrassTile();
         new DirtTile();
@@ -28,6 +30,14 @@ public abstract class Tile {
         this.id = idCount;
         tileLookup.put(id, this);
         idCount++;
+
+        if(tileSheet == null){
+            try {
+                tileSheet = new SpriteSheet("res/tiles.png",32,32);
+            } catch (SlickException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public abstract void render(Graphics g, int x, int y);

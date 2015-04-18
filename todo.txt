@@ -12,5 +12,20 @@ Rounds
 
 
 Towers
-    - Able to place towers in the level
-    - Can't place them over the path
+    - Able to place towers in the level /
+    - Can't place them over the path /
+
+Exp
+    - Exp dropped for killing
+    - Exp can be used to upgrade towers
+        - Have to upgrade each tower indiviually?
+        - All towers of same type upgrade when you upgrade one?
+    - Level based Exp, Level 1 has the default towers, 2 has new unlocks
+        - Takes more exp to get to 2-3 than 1-2
+
+Money
+    - Money dropped for kills
+    - Used to purchase the towers
+    - Price of a tower increases as you upgrade?
+        - Only if all towers are upgraded when you upgrade one
+

@@ -10,7 +10,7 @@ import java.awt.*;
  */
 public abstract class PathFollowingEntity extends Entity {
 
-    private int tilePosition = -1;
+    private int tilePosition = 0;
     private Path path;
 
     public PathFollowingEntity(Path path) {
@@ -21,14 +21,33 @@ public abstract class PathFollowingEntity extends Entity {
 
     public void follow(Level level) {
      //   System.out.println("Follow");
-        tilePosition++;
+
         if(tilePosition == path.getPath().length){
             level.entities.remove(this);
+            level.lives--;
             return;
         }
         Point target = path.getPath()[tilePosition];
-        this.x = target.x * Level.tileSize;
-        this.y = target.y * Level.tileSize;
+        if(target.x * Level.tileSize > this.getX()) {
+            x+=8;
+        }
+        if(target.x * Level.tileSize < this.getX()){
+            x-=8;
+        }
+
+        if(target.y * Level.tileSize > this.getY()){
+          y+=8;
+        }
+
+
+        if(target.y * Level.tileSize < this.getY()){
+            y-=8;
+        }
+
+
+        if(target.x == getX() /Level.tileSize && target.y == getY()/Level.tileSize){
+            tilePosition++;
+        }
     }
 
 

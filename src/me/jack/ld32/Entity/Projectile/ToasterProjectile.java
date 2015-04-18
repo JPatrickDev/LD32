@@ -7,8 +7,10 @@ import me.jack.ld32.Level.Level;
  */
 public class ToasterProjectile extends Projectile{
 
+    float rot = 0f;
     public ToasterProjectile() {
-        super(0.5f, 5, "Toaster", 1f);
+        super(0.5f, 5, "Toaster", 1f, 0, 0);
+        i.setCenterOfRotation(16,16);
     }
 
     @Override

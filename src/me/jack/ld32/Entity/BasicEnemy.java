@@ -19,28 +19,26 @@ public class BasicEnemy extends PathFollowingEntity {
     @Override
     public void render(Graphics g) {
         g.setColor(Color.blue);
-        g.fillRect(x ,y,Level.tileSize,Level.tileSize);
+        g.fillRect(x, y, Level.tileSize, Level.tileSize);
         g.setColor(Color.white);
     }
 
-    int i = 0;
-boolean die = false;
+
+    boolean die = false;
+
     @Override
     public void update(Level level) {
-       // System.out.println("Update");
-        if(die || health <=0){
+        // System.out.println("Update");
+        if (die || health <= 0) {
             level.removeEntity(this);
             return;
         }
-        i++;
-        if (i >= 5) {
-            i = 0;
-            follow(level);
-        }
+
+        follow(level);
     }
 
     @Override
     public void hitByProjectile(Projectile projectile) {
-        health-=projectile.getDamage();
+        health -= projectile.getDamage();
     }
 }

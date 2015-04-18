@@ -27,13 +27,13 @@ public class Level {
     private int[][] tiles;
     public Path path;
 
-    public static final int tileSize = 32;//8 might be too small
+    public static final int tileSize = 32;
 
 
     public CopyOnWriteArrayList<Entity> entities = new CopyOnWriteArrayList<Entity>();
 
     public int round = 0;
-
+    public int lives = 50;
     public Level(int width, int height) {
         this.width = width;
         this.height = height;
@@ -82,7 +82,7 @@ public class Level {
         }
         g.setColor(Color.white);
         for (Point p : path.getPath()) {
-            g.fillRect(p.x * tileSize, p.y * tileSize, tileSize, tileSize);
+         //   g.fillRect(p.x * tileSize, p.y * tileSize, tileSize, tileSize);
         }
 
         for (Entity e : entities) {
@@ -106,7 +106,7 @@ public class Level {
         //System.out.println(toSpawn);
         if (toSpawn != 0) {
             spawnWait++;
-            if (spawnWait > 30 && Math.random() > 0.25) {
+            if (spawnWait > 20 && Math.random() > 0.25) {
                 spawnWait = 0;
                 toSpawn--;
                 entities.add(new BasicEnemy(path));
@@ -125,13 +125,25 @@ public class Level {
         return i;
     }
 
-    public void placeTower(Tower tower) {
-        if (!solid((int)(tower.getX() / tileSize),(int)( tower.getY() / tileSize))) return;
+    public boolean placeTower(Tower tower) {
+        if (!solid((int)(tower.getX() / tileSize),(int)( tower.getY() / tileSize))) return false;
+        for(Entity e : entities){
+            if(e instanceof Tower){
+                if(e.getX() == tower.getX() && e.getY() == tower.getY()){
+                    return false;
+                }
+            }
+        }
         entities.add(tower);
+
+
+        return true;
     }
 
     public boolean solid(int x, int y) {
-        return Tile.tileLookup.get(getTileAt(x, y)).isSolid();
+        Tile tile = Tile.tileLookup.get(getTileAt(x, y));
+        if(tile == null)return false;
+        return tile.isSolid();
     }
 
 

@@ -87,10 +87,19 @@ public class EntityProjectile extends Entity{
         level.removeEntity(this);
     }
 
+    float angle = 0f;
+
     @Override
     public void render(Graphics g) {
-      //  g.drawImage(projectile.getImage(),x,y);
-        g.fillRect(x,y,8,8);
+        projectile.getI().rotate(angle);
+        g.drawImage(projectile.getI(),x,y);
+        angle++;
+        if(angle > 360){
+            angle = 0;
+        }
+
+
+
     }
 
 
