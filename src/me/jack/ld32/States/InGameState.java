@@ -17,6 +17,8 @@ public class InGameState extends BasicGameState {
 
     Level level;
 
+
+
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         gameContainer.setAlwaysRender(true);
@@ -34,13 +36,20 @@ public class InGameState extends BasicGameState {
         g.fillRect(0, 480, 800, 600 - 480);
         g.setColor(Color.white);
         g.drawString("Round: " + level.round, 5, 490);
-        g.drawString("Lives remaining: " + level.lives, 5, 500);
+        g.drawString("Lives remaining: " + level.lives, 5, 505);
+        g.drawString("Money: " + level.money, 5, 520);
 
         g.drawString("Towers:", 300, 500);
         int x = 300;
         int y = 532;
         for (Tower tower : Tower.towers) {
             g.drawImage(tower.icon, x, y);
+            g.drawString("$" + tower.cost,x,y+32);
+            if(level.money < tower.cost){
+                g.setColor(badPlacement);
+                g.fillRect(x, y,32,32);
+                g.setColor(Color.white);
+            }
             x += 34;
         }
 
@@ -101,7 +110,7 @@ public class InGameState extends BasicGameState {
             int yy = 532;
             for (Tower tower : Tower.towers) {
                 Rectangle hit = new Rectangle(xx, yy, 32, 32);
-                if (hit.contains(x, y)) {
+                if (hit.contains(x, y) && tower.cost <= level.money) {
                     holding = tower;
                     holdingTower = true;
                 }
@@ -109,7 +118,7 @@ public class InGameState extends BasicGameState {
             }
         } else {
             //level
-            if (button == 0 && holdingTower && holding != null) {
+            if (button == 0 && holdingTower && holding != null && holding.cost <= level.money) {
                 System.out.println("Placing");
                 if (y >= 480) return;
                 int tX = x / Level.tileSize;
@@ -119,6 +128,7 @@ public class InGameState extends BasicGameState {
                 if (success) {
                     holdingTower = false;
                     holding = null;
+                    level.money-= tower.cost;
                 }
             }
         }

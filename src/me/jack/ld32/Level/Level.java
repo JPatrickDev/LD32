@@ -34,6 +34,9 @@ public class Level {
 
     public int round = 0;
     public int lives = 50;
+
+    public float money = 200.0f;
+
     public Level(int width, int height) {
         this.width = width;
         this.height = height;

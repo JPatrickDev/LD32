@@ -21,10 +21,14 @@ public abstract class Tower extends Entity {
 
     public Image icon;
     public static ArrayList<Tower> towers = new ArrayList<Tower>();
-    static{
-        towers.add(new ToasterTower(-1,-1));
+
+    static {
+        towers.add(new ToasterTower(-1, -1));
     }
-    public Tower(int x, int y, int attackRadius, int iconX,int iconY) {
+
+    public float cost;
+
+    public Tower(int x, int y, int attackRadius, int iconX, int iconY, float cost) {
         super(x, y);
         if (icons == null) {
             try {
@@ -33,13 +37,14 @@ public abstract class Tower extends Entity {
                 e.printStackTrace();
             }
         }
-        icon = icons.getSprite(iconX,iconY);
+        icon = icons.getSprite(iconX, iconY);
         attackCircle = new Circle(x + Level.tileSize / 2, y + Level.tileSize / 2, attackRadius);
+        this.cost = cost;
     }
 
     public static Tower create(int tX, int tY, Tower holding) {
-        if(holding instanceof ToasterTower){
-            return new ToasterTower(tX * Level.tileSize,tY*Level.tileSize);
+        if (holding instanceof ToasterTower) {
+            return new ToasterTower(tX * Level.tileSize, tY * Level.tileSize);
         }
         return null;
     }

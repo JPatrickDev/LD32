@@ -24,8 +24,8 @@ Exp
         - Takes more exp to get to 2-3 than 1-2
 
 Money
-    - Money dropped for kills
-    - Used to purchase the towers
+    - Money dropped for kills/
+    - Used to purchase the towers/
     - Price of a tower increases as you upgrade?
         - Only if all towers are upgraded when you upgrade one
 

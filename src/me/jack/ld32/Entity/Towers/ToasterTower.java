@@ -20,7 +20,7 @@ public class ToasterTower extends Tower {
     private int width, height;
 
     public ToasterTower(int x, int y) {
-        super(x, y,3*Level.tileSize,0,0);
+        super(x, y, 3 * Level.tileSize, 0, 0, 100f);
         this.width = 1;
         this.height = 1;
     }
@@ -46,7 +46,7 @@ public class ToasterTower extends Tower {
         if(enemiesInRange.size() == 0)return;
         Entity target = enemiesInRange.get(r.nextInt(enemiesInRange.size()));
         wait++;
-        if(wait <= 10)return;
+        if(wait <= 20)return;
         wait = 0;
 
         ToasterProjectile tP = new ToasterProjectile();

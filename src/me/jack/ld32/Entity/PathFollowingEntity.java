@@ -29,19 +29,19 @@ public abstract class PathFollowingEntity extends Entity {
         }
         Point target = path.getPath()[tilePosition];
         if(target.x * Level.tileSize > this.getX()) {
-            x+=8;
+            x+=4;
         }
         if(target.x * Level.tileSize < this.getX()){
-            x-=8;
+            x-=4;
         }
 
         if(target.y * Level.tileSize > this.getY()){
-          y+=8;
+          y+=4;
         }
 
 
         if(target.y * Level.tileSize < this.getY()){
-            y-=8;
+            y-=4;
         }
 
 

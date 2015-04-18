@@ -9,7 +9,7 @@ public class ToasterProjectile extends Projectile{
 
     float rot = 0f;
     public ToasterProjectile() {
-        super(0.5f, 5, "Toaster", 1f, 0, 0);
+        super(0.5f, 10, "Toaster", 1f, 0, 0);
         i.setCenterOfRotation(16,16);
     }
 

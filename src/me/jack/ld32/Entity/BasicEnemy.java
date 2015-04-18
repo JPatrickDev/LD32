@@ -6,6 +6,8 @@ import me.jack.ld32.Level.Path;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
+import java.awt.*;
+
 /**
  * Created by Jack on 18/04/2015.
  */
@@ -31,6 +33,9 @@ public class BasicEnemy extends PathFollowingEntity {
         // System.out.println("Update");
         if (die || health <= 0) {
             level.removeEntity(this);
+            if(health <= 0){
+                level.money+=25;
+            }
             return;
         }
 
