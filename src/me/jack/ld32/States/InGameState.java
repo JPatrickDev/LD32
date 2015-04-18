@@ -1,11 +1,9 @@
 package me.jack.ld32.States;
 
 import me.jack.ld32.Entity.BasicEnemy;
+import me.jack.ld32.Entity.Towers.ToasterTower;
 import me.jack.ld32.Level.Level;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -35,8 +33,21 @@ public class InGameState extends BasicGameState {
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
         level.update();
+
+
     }
 
+    @Override
+    public void mouseReleased(int button, int x, int y) {
+        super.mouseReleased(button, x, y);
+        if (button == 0) {
+            System.out.println("Placing");
+            int tX = x / Level.tileSize;
+            int tY = y / Level.tileSize;
+            ToasterTower tower = new ToasterTower(tX * Level.tileSize, tY * Level.tileSize);
+            level.placeTower(tower);
+        }
+    }
 
     public void start() throws SlickException {
         level = new Level(25, 15);

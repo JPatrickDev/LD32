@@ -14,7 +14,7 @@ public abstract class PathFollowingEntity extends Entity {
     private Path path;
 
     public PathFollowingEntity(Path path) {
-        super(path.getPath()[0].x, path.getPath()[0].y);
+        super(path.getPath()[0].x * Level.tileSize, path.getPath()[0].y * Level.tileSize);
         this.path = path;
     }
 
@@ -27,8 +27,8 @@ public abstract class PathFollowingEntity extends Entity {
             return;
         }
         Point target = path.getPath()[tilePosition];
-        this.x = target.x;
-        this.y = target.y;
+        this.x = target.x * Level.tileSize;
+        this.y = target.y * Level.tileSize;
     }
 
 
