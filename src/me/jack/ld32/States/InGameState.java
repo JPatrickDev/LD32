@@ -1,6 +1,6 @@
 package me.jack.ld32.States;
 
-import me.jack.ld32.Entity.BasicEnemy;
+import me.jack.ld32.Entity.Enemy.BlueEnemy;
 import me.jack.ld32.Entity.Towers.Tower;
 import me.jack.ld32.Level.Level;
 import org.lwjgl.input.Keyboard;
@@ -176,7 +176,7 @@ public class InGameState extends BasicGameState {
     public void start() throws SlickException {
         level = new Level(25, 15);
         level.loadFromImg("res/level.png");
-        level.entities.add(new BasicEnemy(level.path));
+        level.entities.add(new BlueEnemy(level.path));
     }
 
     @Override

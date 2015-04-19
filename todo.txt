@@ -35,12 +35,12 @@ Money
         - Only if all towers are upgraded when you upgrade one/
 
 Balance
-    - Different enemy types
-        - Health and speed increase
+    - Different enemy types/
+        - Health / and speed increase
 
 Graphics
     - All towers need textures/
-    - Enemies need textures
+    - Enemies need textures/
     - Upgrades GUI needs texturing
     - All towers need icons/
 
@@ -58,5 +58,4 @@ Difficulty settings
 
 Game over if lives reaches 0
 
-Plan for final day:
 

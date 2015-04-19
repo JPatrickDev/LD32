@@ -1,8 +1,8 @@
 package me.jack.ld32.Level;
 
-import me.jack.ld32.Entity.BasicEnemy;
+import me.jack.ld32.Entity.Enemy.BlueEnemy;
+import me.jack.ld32.Entity.Enemy.RedEnemy;
 import me.jack.ld32.Entity.Entity;
-import me.jack.ld32.Entity.EntityProjectile;
 import me.jack.ld32.Entity.PathFollowingEntity;
 import me.jack.ld32.Entity.Towers.Tower;
 import me.jack.ld32.Level.Tile.Tile;
@@ -11,12 +11,12 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.*;
+import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
 
 import java.awt.*;
-import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -75,14 +75,15 @@ public class Level {
         path = Path.generatePath(this);
     }
 
-    public void updateExp(int add){
+    public void updateExp(int add) {
         System.out.println("EXP: " + exp + "   Exp for level " + expForLevel(level));
-        exp+=add;
-        if(exp >= expForLevel(level)){
+        exp += add;
+        if (exp >= expForLevel(level)) {
             exp = 0;
             level++;
         }
     }
+
     public int calculateEnemies() {
         int i = round * 2;
         System.out.println("Round: " + round + " i " + i);
@@ -127,7 +128,15 @@ public class Level {
             if (spawnWait > 20 && Math.random() > 0.25) {
                 spawnWait = 0;
                 toSpawn--;
-                entities.add(new BasicEnemy(path));
+                if (round >= 5) {
+                    if (new Random().nextInt(5) == 0)
+                        entities.add(new RedEnemy(path));
+                    else
+                        entities.add(new BlueEnemy(path));
+                } else {
+                    entities.add(new BlueEnemy(path));
+                }
+
             }
         }
     }
@@ -191,7 +200,7 @@ public class Level {
     public ArrayList<Entity> getEnimiesInRange(Circle attackCircle) {
         ArrayList<Entity> entitiesInRange = new ArrayList<Entity>();
         for (Entity e : entities) {
-            if (!(e instanceof BasicEnemy)) {
+            if (!(e instanceof PathFollowingEntity)) {
                 continue;
             }
             org.newdawn.slick.geom.Rectangle hitBox = new Rectangle(e.getX(), e.getY(), Level.tileSize, Level.tileSize);
@@ -210,12 +219,12 @@ public class Level {
         entities.add(entity);
     }
 
-    public void applyUpgrade(Upgrade selectedUpgrade,Tower tower) {
-        for(Entity e : entities){
-            if(e instanceof  Tower){
+    public void applyUpgrade(Upgrade selectedUpgrade, Tower tower) {
+        for (Entity e : entities) {
+            if (e instanceof Tower) {
                 Tower t = (Tower) e;
-                if(t.name.equals(tower.name))
-                t.upgrade(selectedUpgrade);
+                if (t.name.equals(tower.name))
+                    t.upgrade(selectedUpgrade);
             }
         }
     }

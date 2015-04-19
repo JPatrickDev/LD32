@@ -70,7 +70,7 @@ public class EntityProjectile extends Entity {
         Rectangle me = new Rectangle((int) x, (int) y, 16, 16);
         for (Entity e : level.entities) {
             Rectangle eRekt = new Rectangle((int) e.x, (int) e.y, 32, 32);
-            if (me.intersects(eRekt) && e instanceof BasicEnemy) {
+            if (me.intersects(eRekt) && e instanceof PathFollowingEntity) {
                 e.hitByProjectile(projectile);
                 level.removeEntity(this);
                 return;
