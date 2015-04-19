@@ -10,7 +10,7 @@ public class ToasterProjectile extends Projectile{
     float rot = 0f;
     public ToasterProjectile(float damage) {
         super(damage, 10, "Toaster", 1f, 0, 0);
-        i.setCenterOfRotation(16,16);
+        i.setCenterOfRotation(8,8);
     }
 
     @Override

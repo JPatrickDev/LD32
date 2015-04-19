@@ -87,6 +87,7 @@ public class UpgradesState extends BasicGameState {
         int x = 0;
         int y = heightPerTower * pos;
         g.drawImage(i, x, y);
+        g.drawImage(tower.icon,x + 8,y + 16);
         smallPrint.drawString(x + 50, y + 5, tower.name);
     }
 

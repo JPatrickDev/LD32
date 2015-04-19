@@ -28,7 +28,7 @@ public class PenTower extends Tower{
     public static float damage = 0.5f;
 
     public PenTower(int x, int y) {
-        super(x, y, 2 * Level.tileSize, 1, 0, 100f, "Pen Tower", "Fires 8 pens in a circle");
+        super(x, y, 2 * Level.tileSize, 2, 0, 100f, "Pen Tower", "Fires 8 pens in a circle");
 
         this.width = 1;
         this.height = 1;
@@ -41,10 +41,8 @@ public class PenTower extends Tower{
 
     @Override
     public void render(Graphics g) {
-        g.setLineWidth(5f);
-        g.setColor(Color.red);
+        g.drawImage(icon,x,y);
 
-        g.fillRect(x, y, Level.tileSize * width, height * Level.tileSize);
 
     }
 

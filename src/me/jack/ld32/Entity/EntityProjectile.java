@@ -67,7 +67,7 @@ public class EntityProjectile extends Entity {
             onPlayerIntersect(level);
         }*/
 
-        Rectangle me = new Rectangle((int) x, (int) y, 8, 8);
+        Rectangle me = new Rectangle((int) x, (int) y, 16, 16);
         for (Entity e : level.entities) {
             Rectangle eRekt = new Rectangle((int) e.x, (int) e.y, 32, 32);
             if (me.intersects(eRekt) && e instanceof BasicEnemy) {

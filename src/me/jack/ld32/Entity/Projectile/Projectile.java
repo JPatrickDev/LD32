@@ -23,7 +23,7 @@ public abstract class Projectile {
 
         if(projectileSprites == null){
             try {
-                projectileSprites = new SpriteSheet("res/projectiles.png",32,32);
+                projectileSprites = new SpriteSheet("res/projectiles.png",16,16);
             } catch (SlickException e) {
                 e.printStackTrace();
             }
@@ -34,6 +34,7 @@ public abstract class Projectile {
         this.name = name;
         this.life = life;
         i = projectileSprites.getSprite(tX,tY);
+
 
 
     }

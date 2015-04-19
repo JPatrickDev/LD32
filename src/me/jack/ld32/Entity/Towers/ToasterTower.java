@@ -43,11 +43,8 @@ public class ToasterTower extends Tower {
     Color attackCircleColor = new Color(255,0,0,100);
     @Override
     public void render(Graphics g) {
-        g.setLineWidth(5f);
-        g.setColor(Color.orange);
 
-        g.fillRect(x, y, Level.tileSize * width, height * Level.tileSize);
-
+        g.drawImage(icon,x,y);
 
     }
 

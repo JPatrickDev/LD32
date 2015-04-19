@@ -44,10 +44,8 @@ public class SpoonTower extends Tower {
 
     @Override
     public void render(Graphics g) {
-        g.setLineWidth(5f);
-        g.setColor(Color.red);
+        g.drawImage(icon,x,y);
 
-        g.fillRect(x, y, Level.tileSize * width, height * Level.tileSize);
 
     }
 

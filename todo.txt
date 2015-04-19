@@ -16,10 +16,10 @@ Towers
     - Able to place towers in the level /
     - Can't place them over the path /
 
-    - 3-4 tower types
-        - all with upgrades
+    - 3-4 tower types/
+        - all with upgrades/
     - Tower idea:
-        - Pen gun that fires in a circle
+        - Pen gun that fires in a circle/
 Exp
     - Exp dropped for killing/
     - Exp can be used to upgrade towers/
@@ -39,10 +39,10 @@ Balance
         - Health and speed increase
 
 Graphics
-    - All towers need textures
+    - All towers need textures/
     - Enemies need textures
     - Upgrades GUI needs texturing
-    - All towers need icons
+    - All towers need icons/
 
 Sound
     - Sound effects
@@ -60,9 +60,3 @@ Game over if lives reaches 0
 
 Plan for final day:
 
-8-10
-    - Add new tower types, start adding upgrades for them
-10-12
-    - Finish up tower types, start on new enemy types
-12-2
-    - Balancing the game.
