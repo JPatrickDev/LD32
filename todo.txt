@@ -18,7 +18,8 @@ Towers
 
     - 3-4 tower types
         - all with upgrades
-
+    - Tower idea:
+        - Pen gun that fires in a circle
 Exp
     - Exp dropped for killing/
     - Exp can be used to upgrade towers/

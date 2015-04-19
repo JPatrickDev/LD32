@@ -38,10 +38,10 @@ public class UpgradesState extends BasicGameState {
         font = new Font("Verdana", Font.PLAIN, 16);
         this.smallPrint = new TrueTypeFont(font, true);
 
-        towers.add(new ToasterTower(0, 0));
+      //  towers.add(new ToasterTower(0, 0));
     }
 
-    ArrayList<Tower> towers = new ArrayList<Tower>();
+    //ArrayList<Tower> towers = new ArrayList<Tower>();
 
     Image i = null;
 
@@ -63,7 +63,7 @@ public class UpgradesState extends BasicGameState {
         graphics.setColor(Color.white);
 
         int i = 0;
-        for (Tower tower : towers) {
+        for (Tower tower : Tower.towers) {
             drawTower(tower, i, graphics, selected == tower);
 
             i++;
@@ -144,7 +144,7 @@ public class UpgradesState extends BasicGameState {
         if (x <= 200) {
             int pos = y / heightPerTower;
             System.out.println("Clicked on " + pos);
-            selected = towers.get(pos);// TODO Error handling
+            selected = Tower.towers.get(pos);// TODO Error handling
         }
         //    graphics.fillRect(200, 150, 200, 600 - 150);
         if (x > 200 && y >= 150 && x < 400 && y < 600) {

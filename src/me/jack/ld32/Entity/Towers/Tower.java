@@ -29,6 +29,8 @@ public abstract class Tower extends Entity {
 
     static {
         towers.add(new ToasterTower(-1, -1));
+        towers.add(new SpoonTower(-1,-1));
+        towers.add(new PenTower(-1,-1));
     }
 
     public float cost;
@@ -61,6 +63,12 @@ public abstract class Tower extends Entity {
     public static Tower create(int tX, int tY, Tower holding) {
         if (holding instanceof ToasterTower) {
             return new ToasterTower(tX * Level.tileSize, tY * Level.tileSize);
+        }
+        else if(holding instanceof SpoonTower){
+            return new SpoonTower(tX*Level.tileSize,tY*Level.tileSize);
+        }
+        else if(holding instanceof PenTower){
+            return new PenTower(tX*Level.tileSize,tY*Level.tileSize);
         }
         return null;
     }

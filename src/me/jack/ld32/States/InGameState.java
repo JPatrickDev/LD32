@@ -60,7 +60,7 @@ public class InGameState extends BasicGameState {
                 g.fillRect(x, y, 32, 32);
                 g.setColor(Color.white);
             }
-            x += 34;
+            x += 64;
         }
 
         // g.setLineWidth(100f);
@@ -140,12 +140,14 @@ public class InGameState extends BasicGameState {
             int xx = 300;
             int yy = 532;
             for (Tower tower : Tower.towers) {
+                System.out.println(tower.name);
                 Rectangle hit = new Rectangle(xx, yy, 32, 32);
                 if (hit.contains(x, y) && tower.cost <= level.money) {
+                    System.out.println("Holding: " + tower.name);
                     holding = tower;
                     holdingTower = true;
                 }
-                x += 34;
+                xx += 64;
             }
         } else {
             //level

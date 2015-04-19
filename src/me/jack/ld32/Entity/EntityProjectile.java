@@ -1,6 +1,8 @@
 package me.jack.ld32.Entity;
 
+import me.jack.ld32.Entity.Projectile.PenProjectile;
 import me.jack.ld32.Entity.Projectile.Projectile;
+import me.jack.ld32.Entity.Towers.PenTower;
 import me.jack.ld32.Level.Level;
 import org.newdawn.slick.Graphics;
 
@@ -9,7 +11,7 @@ import java.awt.*;
 /**
  * Created by Jack on 18/04/2015.
  */
-public class EntityProjectile extends Entity{
+public class EntityProjectile extends Entity {
 
     protected float vX;
     protected float vY;
@@ -17,12 +19,13 @@ public class EntityProjectile extends Entity{
     protected float life = 1f;
 
     protected Projectile projectile;
+
     public EntityProjectile(float x, float y, float targetX, float targetY, Projectile projectile) {
         super(x, y);
         float xSpeed = (targetX - x);
         float ySpeed = (targetY - y);
 
-        float factor = (float) (projectile.getMoveSpeed()/ Math.sqrt(xSpeed * xSpeed + ySpeed * ySpeed));
+        float factor = (float) (projectile.getMoveSpeed() / Math.sqrt(xSpeed * xSpeed + ySpeed * ySpeed));
         xSpeed *= factor;
         ySpeed *= factor;
         vX = xSpeed;
@@ -35,27 +38,25 @@ public class EntityProjectile extends Entity{
     }
 
 
-
-
     boolean firstTick = true;
 
 
     @Override
     public void update(Level level) {
 
-        if(firstTick){
+        if (firstTick) {
             firstTick = false;
             projectile.onSpawn(level);
         }
 
-        x+=vX;
-        y+=vY;
+        x += vX;
+        y += vY;
 
-        if(x<0|| x > 800 || y < 0 || y > 600){
+        if (x < 0 || x > 800 || y < 0 || y > 600) {
             level.removeEntity(this);
         }
-        life-=0.025;
-        if(life <=0){
+        life -= 0.025;
+        if (life <= 0) {
             level.removeEntity(this);
             projectile.onDestroy(level);
         }
@@ -66,10 +67,10 @@ public class EntityProjectile extends Entity{
             onPlayerIntersect(level);
         }*/
 
-        Rectangle me = new Rectangle((int)x,(int)y,8,8);
-        for(Entity e : level.entities){
-            Rectangle eRekt = new Rectangle((int)e.x,(int)e.y,32,32);
-            if(me.intersects(eRekt) && e instanceof BasicEnemy){
+        Rectangle me = new Rectangle((int) x, (int) y, 8, 8);
+        for (Entity e : level.entities) {
+            Rectangle eRekt = new Rectangle((int) e.x, (int) e.y, 32, 32);
+            if (me.intersects(eRekt) && e instanceof BasicEnemy) {
                 e.hitByProjectile(projectile);
                 level.removeEntity(this);
                 return;
@@ -82,7 +83,7 @@ public class EntityProjectile extends Entity{
 
     }
 
-    public void notifyHitEntity(Entity hit,Level level){
+    public void notifyHitEntity(Entity hit, Level level) {
         projectile.onHitEntity(level);
         level.removeEntity(this);
     }
@@ -91,17 +92,20 @@ public class EntityProjectile extends Entity{
 
     @Override
     public void render(Graphics g) {
-        projectile.getI().rotate(angle);
-        g.drawImage(projectile.getI(),x,y);
-        angle++;
-        if(angle > 360){
-            angle = 0;
+
+        if (!(projectile instanceof PenProjectile)) {
+            projectile.getI().rotate(angle);
+            angle++;
+            if (angle > 360) {
+                angle = 0;
+            }
         }
 
 
+        g.drawImage(projectile.getI(), x, y);
+
 
     }
-
 
 
     public Projectile getProjectile() {

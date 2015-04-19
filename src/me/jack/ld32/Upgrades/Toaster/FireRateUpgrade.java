@@ -1,5 +1,6 @@
 package me.jack.ld32.Upgrades.Toaster;
 
+import me.jack.ld32.Entity.Towers.ToasterTower;
 import me.jack.ld32.Entity.Towers.Tower;
 import me.jack.ld32.Upgrades.Upgrade;
 
@@ -14,6 +15,6 @@ public class FireRateUpgrade extends Upgrade {
 
     @Override
     public void apply(Tower tower) {
-
+        ToasterTower.fireRate =  10;
     }
 }
