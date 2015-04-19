@@ -23,6 +23,8 @@ public class InGameState extends BasicGameState {
     Image upgradeButton = null;
     Image guiBg = null;
 
+    Image igTut = null;
+
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         gameContainer.setAlwaysRender(true);
@@ -30,6 +32,12 @@ public class InGameState extends BasicGameState {
         nextRound = new Image("res/nextRound.png");
         upgradeButton = new Image("res/upgradeButton.png");
         guiBg = new Image("res/in_game_gui_background.png");
+        igTut = new Image("res/igtut.png");
+    }
+
+    @Override
+    public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+        super.enter(container, game);
         start();
     }
 
@@ -37,20 +45,22 @@ public class InGameState extends BasicGameState {
     Color badPlacement = new Color(255, 100, 100, 100);
     int i = 0;
 
-    public static void increaseCost(Tower tower,float increase){
-        for(Tower t : Tower.towers){
-            if(t.name.equals(tower.name)){
-                t.cost+=increase;
+    public static void increaseCost(Tower tower, float increase) {
+        for (Tower t : Tower.towers) {
+            if (t.name.equals(tower.name)) {
+                t.cost += increase;
             }
         }
     }
+
+    boolean showingTut = true;
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics g) throws SlickException {
         level.render(g);
 
         g.setColor(Color.red);
-        g.drawImage(guiBg,0,480);
+        g.drawImage(guiBg, 0, 480);
         g.setColor(Color.white);
         g.drawString("Round: " + level.round, 5, 490);
         g.drawString("Lives remaining: " + level.lives, 5, 505);
@@ -62,7 +72,7 @@ public class InGameState extends BasicGameState {
         Input i = gameContainer.getInput();
         for (Tower tower : Tower.towers) {
             g.drawImage(tower.icon, x, y);
-            g.drawString("$" + tower.cost, x-8, y + 32);
+            g.drawString("$" + tower.cost, x - 8, y + 32);
             if (level.money < tower.cost) {
                 g.setColor(badPlacement);
                 g.fillRect(x, y, 32, 32);
@@ -77,12 +87,12 @@ public class InGameState extends BasicGameState {
 
         // g.setLineWidth(100f);
 
-        g.drawString("Exp: " + level.exp + "/" + level.expForLevel(level.level),460,500);
+        g.drawString("Exp: " + level.exp + "/" + level.expForLevel(level.level), 460, 500);
         g.drawString("Exp Level: " + level.level, 460, 520);
 
-        if(betweenRounds) {
+        if (betweenRounds) {
             g.drawImage(nextRound, 600, 550);
-            g.drawImage(upgradeButton,600,502);
+            g.drawImage(upgradeButton, 600, 502);
         }
 
 
@@ -114,24 +124,27 @@ public class InGameState extends BasicGameState {
             }
 
 
-            g.drawImage(holding.icon, screenX, screenY);
+            if (showingTut)
+                g.drawImage(holding.icon, screenX, screenY);
         }
-
 
 
         for (Tower tower : Tower.towers) {
-            if(i.getMouseX() > x && i.getMouseY() > y && i.getMouseX() < x + 32 && i.getMouseY() < y + 32){
+            if (i.getMouseX() > x && i.getMouseY() > y && i.getMouseX() < x + 32 && i.getMouseY() < y + 32) {
                 int xx = i.getMouseX();
-                int yy = i.getMouseY()- 32;
+                int yy = i.getMouseY() - 32;
                 System.out.println("Hover");
                 g.setColor(Color.black);
-                g.fillRect(xx,yy,240, 64);
+                g.fillRect(xx, yy, 240, 64);
                 g.setColor(Color.white);
-                g.drawString(tower.name,xx,yy+5);
-                g.drawString(tower.description,xx,yy+25);
+                g.drawString(tower.name, xx, yy + 5);
+                g.drawString(tower.description, xx, yy + 25);
             }
             x += 70;
         }
+
+        if(showingTut)
+        g.drawImage(igTut, 0, 0);
 
 
     }
@@ -142,12 +155,16 @@ public class InGameState extends BasicGameState {
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
         level.update(this);
-        if(viewUpgrades){
-            UpgradesState.parent= level;
+        if (viewUpgrades) {
+            UpgradesState.parent = level;
             stateBasedGame.enterState(1);
             viewUpgrades = false;
         }
 
+        if (level.lives <= 0) {
+            GameOverState.level = level;
+            stateBasedGame.enterState(2);
+        }
 
     }
 
@@ -155,11 +172,8 @@ public class InGameState extends BasicGameState {
     @Override
     public void keyPressed(int key, char c) {
         super.keyPressed(key, c);
-        if(key == Keyboard.KEY_U){
-            viewUpgrades = true;
-        }
+        showingTut = false;
     }
-
 
 
     @Override
@@ -186,16 +200,16 @@ public class InGameState extends BasicGameState {
                 xx += 64;
                 //  g.drawImage(nextRound,600,550);
 
-                if(x > 600 && y > 550 && x <= 600+194 && y <= 550+45){
-                    if(betweenRounds){
+                if (x > 600 && y > 550 && x <= 600 + 194 && y <= 550 + 45) {
+                    if (betweenRounds) {
                         level.startNextRound();
-                        betweenRounds= false;
+                        betweenRounds = false;
                     }
                     System.out.println("Next round clicked");
                 }
-                if(x > 600 && y > 505 && x <= 600+194 && y <= 505+45){
+                if (x > 600 && y > 505 && x <= 600 + 194 && y <= 505 + 45) {
 
-                    if(!viewUpgrades)
+                    if (!viewUpgrades)
                         viewUpgrades = true;
                     System.out.println("Upgrades button clicked");
                 }
@@ -227,7 +241,8 @@ public class InGameState extends BasicGameState {
     public void start() throws SlickException {
         level = new Level(25, 15);
         level.loadFromImg("res/level.png");
-        level.entities.add(new BlueEnemy(level.path));
+        //level.entities.add(new BlueEnemy(level.path));
+        showingTut  = true;
     }
 
     @Override
