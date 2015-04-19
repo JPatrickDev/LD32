@@ -35,7 +35,7 @@ public class Level {
     public CopyOnWriteArrayList<Entity> entities = new CopyOnWriteArrayList<Entity>();
 
     public int round = 0;
-    public int lives = 5;
+    public int lives = 50;
 
     public float money = 200.0f;
     public int exp = 0;

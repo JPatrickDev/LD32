@@ -15,6 +15,7 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class InGameState extends BasicGameState {
 
+    public static int setLevel = -1;
     Level level;
     private boolean viewUpgrades = false;
 
@@ -38,7 +39,12 @@ public class InGameState extends BasicGameState {
     @Override
     public void enter(GameContainer container, StateBasedGame game) throws SlickException {
         super.enter(container, game);
-        start();
+
+        if(viewUpgrades){
+            viewUpgrades = false;
+        }else{
+            start();
+        }
     }
 
     Color goodPlacement = new Color(50, 255, 0, 100);
@@ -124,7 +130,7 @@ public class InGameState extends BasicGameState {
             }
 
 
-            if (showingTut)
+
                 g.drawImage(holding.icon, screenX, screenY);
         }
 
@@ -143,8 +149,8 @@ public class InGameState extends BasicGameState {
             x += 70;
         }
 
-        if(showingTut)
-        g.drawImage(igTut, 0, 0);
+        if (showingTut)
+            g.drawImage(igTut, 0, 0);
 
 
     }
@@ -158,7 +164,7 @@ public class InGameState extends BasicGameState {
         if (viewUpgrades) {
             UpgradesState.parent = level;
             stateBasedGame.enterState(1);
-            viewUpgrades = false;
+
         }
 
         if (level.lives <= 0) {
@@ -240,9 +246,12 @@ public class InGameState extends BasicGameState {
 
     public void start() throws SlickException {
         level = new Level(25, 15);
-        level.loadFromImg("res/level.png");
+        if (setLevel == 0)
+            level.loadFromImg("res/level.png");
+        else if (setLevel == 1)
+            level.loadFromImg("res/level2.png");
         //level.entities.add(new BlueEnemy(level.path));
-        showingTut  = true;
+        showingTut = true;
     }
 
     @Override
