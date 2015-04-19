@@ -130,11 +130,11 @@ public class Level {
         //System.out.println(toSpawn);
         if (toSpawn != 0) {
             spawnWait++;
-            if (spawnWait > 20 && Math.random() > 0.25) {
+            if (spawnWait > 20 && Math.random() > 0.5) {
                 spawnWait = 0;
                 toSpawn--;
                 if (round >= 5) {
-                    if (new Random().nextInt(5) == 0)
+                    if (new Random().nextInt(3) == 0)
                         entities.add(new RedEnemy(path));
                     else
                         entities.add(new BlueEnemy(path));

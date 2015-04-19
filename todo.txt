@@ -63,7 +63,7 @@ Sound
         - ESC button in upgrades GUI/
         - Level select at the start, instead of a full main menu
         - Text in upgrades menu needs moving around a bit/
-        - Info on tower when hovered
+        - Info on tower when hovered/
 
 
 

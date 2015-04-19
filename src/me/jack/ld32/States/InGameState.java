@@ -59,6 +59,7 @@ public class InGameState extends BasicGameState {
         g.drawString("Towers:", 300, 500);
         int x = 250;
         int y = 532;
+        Input i = gameContainer.getInput();
         for (Tower tower : Tower.towers) {
             g.drawImage(tower.icon, x, y);
             g.drawString("$" + tower.cost, x-8, y + 32);
@@ -66,9 +67,13 @@ public class InGameState extends BasicGameState {
                 g.setColor(badPlacement);
                 g.fillRect(x, y, 32, 32);
                 g.setColor(Color.white);
+
             }
+
             x += 70;
         }
+        x = 250;
+
 
         // g.setLineWidth(100f);
 
@@ -80,7 +85,7 @@ public class InGameState extends BasicGameState {
             g.drawImage(upgradeButton,600,502);
         }
 
-        i++;
+
         //g.setLineWidth(1f);
         Input input = gameContainer.getInput();
         int mX = input.getMouseX();
@@ -111,6 +116,23 @@ public class InGameState extends BasicGameState {
 
             g.drawImage(holding.icon, screenX, screenY);
         }
+
+
+
+        for (Tower tower : Tower.towers) {
+            if(i.getMouseX() > x && i.getMouseY() > y && i.getMouseX() < x + 32 && i.getMouseY() < y + 32){
+                int xx = i.getMouseX();
+                int yy = i.getMouseY()- 32;
+                System.out.println("Hover");
+                g.setColor(Color.black);
+                g.fillRect(xx,yy,240, 64);
+                g.setColor(Color.white);
+                g.drawString(tower.name,xx,yy+5);
+                g.drawString(tower.description,xx,yy+25);
+            }
+            x += 70;
+        }
+
 
     }
 
@@ -151,7 +173,7 @@ public class InGameState extends BasicGameState {
         }
         if (y >= 480) {
             //UI
-            int xx = 300;
+            int xx = 250;
             int yy = 532;
             for (Tower tower : Tower.towers) {
                 System.out.println(tower.name);

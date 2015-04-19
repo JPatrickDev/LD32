@@ -106,8 +106,8 @@ public class UpgradesState extends BasicGameState {
         int startX = 210;
         int startY = 0;
         ttf.drawString(startX, startY, tower.name, Color.white);
-        ttf.drawString(startX, startY + 50, tower.description, Color.white);
-        ttf.drawString(startX, startY + 100, "Cost: " + selected.cost);
+        ttf.drawString(startX, startY + 55, tower.description, Color.white);
+        ttf.drawString(startX, startY + 105, "Cost: " + selected.cost);
 
     }
 
