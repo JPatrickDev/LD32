@@ -10,7 +10,7 @@ import me.jack.ld32.Upgrades.Upgrade;
 public class DuelToasterUpgrade extends Upgrade {
 
     public DuelToasterUpgrade() {
-        super("Duel Toaster Upgrade", "Fire two toasters at once",15, 25, 0,0,200f);
+        super("Duel Toaster", "Fire two toasters at once",15, 25, 0,0,200f);
     }
 
     @Override

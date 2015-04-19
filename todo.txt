@@ -20,6 +20,9 @@ Towers
         - all with upgrades/
     - Tower idea:
         - Pen gun that fires in a circle/
+        - Static towers
+            - Radius slowdown effect
+
 Exp
     - Exp dropped for killing/
     - Exp can be used to upgrade towers/
@@ -37,20 +40,31 @@ Money
 Balance
     - Different enemy types/
         - Health / and speed increase
+    - Boss rounds?
+    - Exp rate may need changing
+    - Entities per round also
+
 
 Graphics
     - All towers need textures/
     - Enemies need textures/
-    - Upgrades GUI needs texturing
-        - Buttons need textures
-        - All upgrades need icons
-        - Text overflows in some places
-        - Needs to not crash if you click on an empty slot
+    - Upgrades GUI needs texturing/
+        - Buttons need textures/
+        - All upgrades need icons/
+        - Text overflows in some places/
+        - Needs to not crash if you click on an empty slot/
     - All towers need icons/
 
 Sound
     - Sound effects
     - FL studios?
+
+    GUI
+        - ESC button in upgrades GUI/
+        - Level select at the start, instead of a full main menu
+        - Text in upgrades menu needs moving around a bit/
+        - Info on tower when hovered
+
 
 
 Levels

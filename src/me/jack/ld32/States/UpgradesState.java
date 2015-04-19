@@ -26,6 +26,8 @@ public class UpgradesState extends BasicGameState {
     public static Level parent;
     private boolean backToGame = false;
 
+    Image exit,purchase,topBanner,upgradeInfo,upgradeListBackground,towerListBackground;
+
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         gameContainer.setShowFPS(false);
@@ -37,7 +39,12 @@ public class UpgradesState extends BasicGameState {
         this.ttf = ttf;
         font = new Font("Verdana", Font.PLAIN, 16);
         this.smallPrint = new TrueTypeFont(font, true);
-
+        exit = new Image("res/backToGame.png");
+        purchase = new Image("res/purchase.png");
+        topBanner = new Image("res/topBanner_upgrades.png");
+        upgradeInfo = new Image("res/upgrade_info_background.png");
+        upgradeListBackground = new Image("res/upgrades_list_background.png");
+        towerListBackground = new Image("res/tower_list_background.png");
       //  towers.add(new ToasterTower(0, 0));
     }
 
@@ -53,14 +60,13 @@ public class UpgradesState extends BasicGameState {
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
 
-        graphics.fillRect(0, 0, 200, 600);
-        graphics.setColor(Color.green);
-        graphics.fillRect(200, 0, 800 - 200, 150);
-        graphics.setColor(Color.red);
-        graphics.fillRect(400, 150, 600, 600 - 150);
-        graphics.setColor(Color.orange);
-        graphics.fillRect(200, 150, 200, 600 - 150);
+        graphics.drawImage(towerListBackground,0,0);
+        graphics.drawImage(topBanner, 200, 00);
+        graphics.drawImage(upgradeInfo, 400, 150);
+        graphics.drawImage(upgradeListBackground,200,150);
         graphics.setColor(Color.white);
+
+        graphics.drawImage(exit,0,600-45);
 
         int i = 0;
         for (Tower tower : Tower.towers) {
@@ -92,11 +98,12 @@ public class UpgradesState extends BasicGameState {
     }
 
     private void drawTowerInfo(Tower tower, Graphics g) {
-        ttf.drawString(555, 0, "Money: " + parent.money);
+        ttf.drawString(545, 0, "Money: " + parent.money);
 
-        ttf.drawString(555, 30, "Exp Level: " + parent.level);
+        ttf.drawString(545, 30, "Exp Level: " + parent.level);
+
         if (tower == null) return;
-        int startX = 200;
+        int startX = 210;
         int startY = 0;
         ttf.drawString(startX, startY, tower.name, Color.white);
         ttf.drawString(startX, startY + 50, tower.description, Color.white);
@@ -117,8 +124,8 @@ public class UpgradesState extends BasicGameState {
 
     private void drawUpgradeInfo(Upgrade upgrade, Graphics g) {
         if (upgrade == null) return;
-        int startX = 400;
-        int startY = 150;
+        int startX = 410;
+        int startY = 155;
         ttf.drawString(startX, startY, upgrade.getTitle());
         smallPrint.drawString(startX, startY += 50, upgrade.getDescription());
         smallPrint.drawString(startX, startY += 50, "Unlocked at Exp Level " + upgrade.getActivationLevel());
@@ -126,11 +133,8 @@ public class UpgradesState extends BasicGameState {
 
 
         //        graphics.fillRect(400, 150, 600, 600 - 150);
-        g.setColor(Color.cyan);
-        g.fillRect(startX + 100, startY + 150, 200, 50);
-        g.setColor(Color.white);
-        ttf.drawString(startX + 100, startY + 150, "Purchase");
 
+        g.drawImage(purchase,startX + 100,startY + 150);
     }
 
     @Override
@@ -143,16 +147,25 @@ public class UpgradesState extends BasicGameState {
     @Override
     public void mousePressed(int button, int x, int y) {
         super.mousePressed(button, x, y);
-        if (x <= 200) {
+        if (x <= 200 && y <555) {
             int pos = y / heightPerTower;
             System.out.println("Clicked on " + pos);
+            if(pos <= Tower.towers.size()-1)
             selected = Tower.towers.get(pos);// TODO Error handling
         }
+       // graphics.drawImage(exit,0,600-45);
+        if(x > 0 && y > 555 && x < 194 && y < 600){
+            System.out.println("Exit");
+            if(!backToGame)
+                backToGame = true;
+        }
+
         //    graphics.fillRect(200, 150, 200, 600 - 150);
         if (x > 200 && y >= 150 && x < 400 && y < 600) {
             int pos = (y - 150) / heightPerTower;
             System.out.println("Clicked on " + pos);
             if (selected != null) {
+                if(pos <= selected.upgrades.size()-1)
                 selectedUpgrade = selected.upgrades.get(pos);//TODO Error handling
             }
         }
