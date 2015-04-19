@@ -6,6 +6,7 @@ import me.jack.ld32.Entity.Entity;
 import me.jack.ld32.Entity.PathFollowingEntity;
 import me.jack.ld32.Entity.Towers.Tower;
 import me.jack.ld32.Level.Tile.Tile;
+import me.jack.ld32.States.InGameState;
 import me.jack.ld32.Upgrades.Upgrade;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -66,7 +67,10 @@ public class Level {
             for (int y = 0; y != h; y++) {
                 Color color = i.getColor(x, y);
                 if (color.getRed() == 30 && color.getGreen() == 255 && color.getBlue() == 0) {
-                    setTileAt(x, y, 0);
+                    if (new Random().nextBoolean())
+                        setTileAt(x, y, 0);
+                    else
+                        setTileAt(x, y, 2);
                 } else {
                     setTileAt(x, y, 1);
                 }
@@ -112,14 +116,15 @@ public class Level {
     int toSpawn = 0;
     int spawnWait = 0;
 
-    public void update() {
+    public void update(InGameState state) {
         for (Entity e : entities) {
             e.update(this);
         }
         boolean roundOver = checkRoundOver();
         if (roundOver && toSpawn == 0) {
-            round++;
-            toSpawn = calculateEnemies();
+            // round++;
+            // toSpawn = calculateEnemies();
+            state.betweenRounds = true;
         }
 
         //System.out.println(toSpawn);
@@ -140,6 +145,12 @@ public class Level {
             }
         }
     }
+
+    public void startNextRound() {
+        round++;
+        toSpawn = calculateEnemies();
+    }
+
 
     private boolean checkRoundOver() {
         boolean i = true;
@@ -228,4 +239,6 @@ public class Level {
             }
         }
     }
+
+
 }

@@ -25,7 +25,7 @@ public abstract class Upgrade {
         this.activationLevel = activationLevel;
         if(upgradeIconSpriteSheet == null){
             try {
-                upgradeIconSpriteSheet = new SpriteSheet("res/upgrades.png",16,16);
+                upgradeIconSpriteSheet = new SpriteSheet("res/upgrades.png",32,32);
             } catch (SlickException e) {
                 e.printStackTrace();
             }

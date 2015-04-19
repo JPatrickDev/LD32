@@ -110,6 +110,7 @@ public class UpgradesState extends BasicGameState {
         int x = 200;
         int y = heightPerTower * pos + 150;
         g.drawImage(i, x, y);
+        g.drawImage(upgrade.getIcon(),x + 8,y + 16);
         smallPrint.drawString(x + 45, y + 10, upgrade.getTitle());
         smallPrint.drawString(x + 45, y + 25, "Exp Level " + upgrade.getActivationLevel());
     }

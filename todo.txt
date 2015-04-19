@@ -9,7 +9,7 @@ Entity
 Rounds
     - Round based/
     - No time-limit on a round, wait until all enemies from the current round are dead before starting the next one /
-        - User presses a button to start next round
+        - User presses a button to start next round/
 
 
 Towers
@@ -42,6 +42,10 @@ Graphics
     - All towers need textures/
     - Enemies need textures/
     - Upgrades GUI needs texturing
+        - Buttons need textures
+        - All upgrades need icons
+        - Text overflows in some places
+        - Needs to not crash if you click on an empty slot
     - All towers need icons/
 
 Sound

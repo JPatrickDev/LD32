@@ -18,6 +18,7 @@ public abstract class Tile {
     static {
         new GrassTile();
         new DirtTile();
+        new AltGrassTile();
     }
 
     private int id;

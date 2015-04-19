@@ -18,11 +18,16 @@ public class InGameState extends BasicGameState {
     Level level;
     private boolean viewUpgrades = false;
 
+    public boolean betweenRounds = false;
+    Image nextRound = null;
+    Image upgradeButton = null;
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         gameContainer.setAlwaysRender(true);
         gameContainer.setUpdateOnlyWhenVisible(false);
+        nextRound = new Image("res/nextRound.png");
+        upgradeButton = new Image("res/upgradeButton.png");
         start();
     }
 
@@ -66,7 +71,12 @@ public class InGameState extends BasicGameState {
         // g.setLineWidth(100f);
 
         g.drawString("Exp: " + level.exp + "/" + level.expForLevel(level.level),400,480);
-        g.drawString("Exp Level: " + level.level,400,500);
+        g.drawString("Exp Level: " + level.level, 400, 500);
+
+        if(betweenRounds) {
+            g.drawImage(nextRound, 600, 550);
+            g.drawImage(upgradeButton,600,502);
+        }
 
         i++;
         //g.setLineWidth(1f);
@@ -107,7 +117,7 @@ public class InGameState extends BasicGameState {
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
-        level.update();
+        level.update(this);
         if(viewUpgrades){
             UpgradesState.parent= level;
             stateBasedGame.enterState(1);
@@ -125,6 +135,8 @@ public class InGameState extends BasicGameState {
             viewUpgrades = true;
         }
     }
+
+
 
     @Override
     public void mousePressed(int button, int x, int y) {
@@ -148,6 +160,21 @@ public class InGameState extends BasicGameState {
                     holdingTower = true;
                 }
                 xx += 64;
+                //  g.drawImage(nextRound,600,550);
+
+                if(x > 600 && y > 550 && x <= 600+194 && y <= 550+45){
+                    if(betweenRounds){
+                        level.startNextRound();
+                        betweenRounds= false;
+                    }
+                    System.out.println("Next round clicked");
+                }
+                if(x > 600 && y > 505 && x <= 600+194 && y <= 505+45){
+
+                    if(!viewUpgrades)
+                        viewUpgrades = true;
+                    System.out.println("Upgrades button clicked");
+                }
             }
         } else {
             //level

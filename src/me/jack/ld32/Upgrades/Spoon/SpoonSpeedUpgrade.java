@@ -11,7 +11,7 @@ import me.jack.ld32.Upgrades.Upgrade;
 public class SpoonSpeedUpgrade extends Upgrade{
 
     public SpoonSpeedUpgrade() {
-        super("Spoon Speed", "Increase the speed of the Spoons", 8, 50,1, 0, 150f);
+        super("Spoon Speed", "Increase the speed of the Spoons", 8, 50,0, 0, 150f);
     }
 
     @Override

@@ -10,7 +10,7 @@ import me.jack.ld32.Upgrades.Upgrade;
 public class FireRateUpgrade extends Upgrade {
 
     public FireRateUpgrade() {
-        super("Fire Rate", "Increase the rate of fire of the Toaster Gun", 5, 50, 0, 0, 300f);
+        super("Fire Rate", "Increase the rate of fire of the Toaster Gun", 5, 50, 1, 0, 300f);
     }
 
     @Override
