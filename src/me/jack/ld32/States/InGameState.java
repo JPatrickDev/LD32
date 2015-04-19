@@ -21,6 +21,7 @@ public class InGameState extends BasicGameState {
     public boolean betweenRounds = false;
     Image nextRound = null;
     Image upgradeButton = null;
+    Image guiBg = null;
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
@@ -28,6 +29,7 @@ public class InGameState extends BasicGameState {
         gameContainer.setUpdateOnlyWhenVisible(false);
         nextRound = new Image("res/nextRound.png");
         upgradeButton = new Image("res/upgradeButton.png");
+        guiBg = new Image("res/in_game_gui_background.png");
         start();
     }
 
@@ -48,30 +50,30 @@ public class InGameState extends BasicGameState {
         level.render(g);
 
         g.setColor(Color.red);
-        g.fillRect(0, 480, 800, 600 - 480);
+        g.drawImage(guiBg,0,480);
         g.setColor(Color.white);
         g.drawString("Round: " + level.round, 5, 490);
         g.drawString("Lives remaining: " + level.lives, 5, 505);
         g.drawString("Money: " + level.money, 5, 520);
 
         g.drawString("Towers:", 300, 500);
-        int x = 300;
+        int x = 250;
         int y = 532;
         for (Tower tower : Tower.towers) {
             g.drawImage(tower.icon, x, y);
-            g.drawString("$" + tower.cost, x, y + 32);
+            g.drawString("$" + tower.cost, x-8, y + 32);
             if (level.money < tower.cost) {
                 g.setColor(badPlacement);
                 g.fillRect(x, y, 32, 32);
                 g.setColor(Color.white);
             }
-            x += 64;
+            x += 70;
         }
 
         // g.setLineWidth(100f);
 
-        g.drawString("Exp: " + level.exp + "/" + level.expForLevel(level.level),400,480);
-        g.drawString("Exp Level: " + level.level, 400, 500);
+        g.drawString("Exp: " + level.exp + "/" + level.expForLevel(level.level),460,500);
+        g.drawString("Exp Level: " + level.level, 460, 520);
 
         if(betweenRounds) {
             g.drawImage(nextRound, 600, 550);
