@@ -27,7 +27,7 @@ public class SpoonTower extends Tower {
     public static int spoonSpeed = 10;
     private int width, height;
 
-    public static float damage = 0.5f;
+    public static float damage = 0.25f;
 
     public SpoonTower(int x, int y) {
         super(x, y, 5 * Level.tileSize, 1, 0, 100f, "Spoon Tower", "Throws Spoons");

@@ -13,6 +13,7 @@ import me.jack.ld32.Upgrades.Toaster.ToasterPowerUpgradeTwo;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
+import uk.co.jdpatrick.JEngine.Sound.SoundEngine;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class ToasterTower extends Tower {
     public static boolean duel = false;
     private int width, height;
 
-    public static float damage = 0.5f;
+    public static float damage = 0.40f;
     public ToasterTower(int x, int y) {
         super(x, y, 5 * Level.tileSize, 0, 0, 100f,"Toaster Tower","Throws toasters");
 
@@ -37,15 +38,16 @@ public class ToasterTower extends Tower {
         upgrades.add(new ToasterPowerUpgradeOne());
         upgrades.add(new ToasterPowerUpgradeTwo());
         upgrades.add(new DuelToasterUpgrade());
+        icon.setCenterOfRotation(16,16);
 
     }
 
     Color attackCircleColor = new Color(255,0,0,100);
+    float rot = 0;
     @Override
     public void render(Graphics g) {
-
-        g.drawImage(icon,x,y);
-
+        icon.setRotation(rot);
+        g.drawImage(icon, x, y);
     }
 
   static Random r = new Random();
@@ -65,7 +67,7 @@ public class ToasterTower extends Tower {
         ToasterProjectile tP = new ToasterProjectile(damage);
         EntityProjectile projectile = new EntityProjectile(getX(),getY(),target.getX(),target.getY(),tP);
         level.addEntity(projectile);
-
+        rot = (float) -(Math.atan2(getX() -target.getX(), getY() - target.getY()) * 180 / Math.PI);
         if(duel){
 
              target = enemiesInRange.get(i);
@@ -73,6 +75,7 @@ public class ToasterTower extends Tower {
              projectile = new EntityProjectile(getX(),getY(),target.getX()-64,target.getY()-64,tP);
             level.addEntity(projectile);
         }
+
     }
 
     @Override

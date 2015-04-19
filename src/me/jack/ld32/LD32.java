@@ -8,6 +8,6 @@ import uk.co.jdpatrick.JEngine.JEngine;
 public class LD32 {
 
     public static void main(String[] args){
-        JEngine.start(new LD32Game("NAME For LD32 - Theme: An unconventional weapon"),800,600);
+        JEngine.start(new LD32Game("Toasted For LD32 - Theme: An unconventional weapon"),800,600);
     }
 }

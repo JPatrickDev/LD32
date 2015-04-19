@@ -9,16 +9,19 @@ import org.newdawn.slick.Graphics;
 /**
  * Created by Jack on 19/04/2015.
  */
-public class BlueEnemy extends PathFollowingEntity {
+public class PurpleEnemy extends PathFollowingEntity
+
+{
 
     public static org.newdawn.slick.Image img;
     int rot = 0;
 
-    public BlueEnemy(Path path) {
+    public PurpleEnemy(Path path) {
         super(path);
-        health = 1f;
+        health = 40f;
+        moveSpeed = 8;
         if (img == null) {
-            img = sprites.getSprite(0, 0);
+            img = sprites.getSprite(1, 1);
         }
     }
 
@@ -38,8 +41,8 @@ public class BlueEnemy extends PathFollowingEntity {
         if (die || health <= 0) {
             level.removeEntity(this);
             if (health <= 0) {
-                level.money += 10;
-                level.updateExp(10);
+                level.money += 150;
+                level.updateExp(100);
             }
             return;
         }

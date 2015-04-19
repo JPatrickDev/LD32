@@ -39,10 +39,10 @@ Money
 
 Balance
     - Different enemy types/
-        - Health / and speed increase
+        - Health / and speed increase/
     - Boss rounds?
-    - Exp rate may need changing
-    - Entities per round also
+    - Exp rate may need changing/
+    - Entities per round also/
 
 
 Graphics
@@ -56,7 +56,7 @@ Graphics
     - All towers need icons/
 
 Sound
-    - Sound effects
+    - Sound effects/
     - FL studios?
 
     GUI
@@ -65,16 +65,15 @@ Sound
         - Text in upgrades menu needs moving around a bit/
         - Info on tower when hovered/
         - Instructions overlay/
-            - Hard to read
+            - Hard to read/
 
 
 
 Levels
     - Two or three levels, randomly picked when the game starts?
+        - Three levels to choose from at the start/
 
-Main menu
 
-Difficulty settings
 
 Game over if lives reaches 0/
 

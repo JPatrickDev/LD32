@@ -15,6 +15,6 @@ public class ToasterPowerUpgradeOne extends Upgrade{
 
     @Override
     public void apply(Tower tower) {
-       ToasterTower.damage =  1;
+       ToasterTower.damage = 0.5f;
     }
 }

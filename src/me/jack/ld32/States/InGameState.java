@@ -9,6 +9,7 @@ import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import uk.co.jdpatrick.JEngine.Sound.SoundEngine;
 
 /**
  * Created by Jack on 18/04/2015.
@@ -73,7 +74,7 @@ public class InGameState extends BasicGameState {
         g.drawString("Money: " + level.money, 5, 520);
 
         g.drawString("Towers:", 300, 500);
-        int x = 250;
+        int x = 220;
         int y = 532;
         Input i = gameContainer.getInput();
         for (Tower tower : Tower.towers) {
@@ -88,7 +89,7 @@ public class InGameState extends BasicGameState {
 
             x += 70;
         }
-        x = 250;
+        x = 220;
 
 
         // g.setLineWidth(100f);
@@ -138,9 +139,7 @@ public class InGameState extends BasicGameState {
         for (Tower tower : Tower.towers) {
             if (i.getMouseX() > x && i.getMouseY() > y && i.getMouseX() < x + 32 && i.getMouseY() < y + 32) {
                 int xx = i.getMouseX();
-                int yy = i.getMouseY() - 32;
-                System.out.println("Hover");
-                g.setColor(Color.black);
+                int yy = i.getMouseY() - 32;g.setColor(Color.black);
                 g.fillRect(xx, yy, 240, 64);
                 g.setColor(Color.white);
                 g.drawString(tower.name, xx, yy + 5);
@@ -148,7 +147,7 @@ public class InGameState extends BasicGameState {
             }
             x += 70;
         }
-
+        x = 220;
         if (showingTut)
             g.drawImage(igTut, 0, 0);
 
@@ -193,7 +192,7 @@ public class InGameState extends BasicGameState {
         }
         if (y >= 480) {
             //UI
-            int xx = 250;
+            int  xx = 220;
             int yy = 532;
             for (Tower tower : Tower.towers) {
                 System.out.println(tower.name);
@@ -202,6 +201,9 @@ public class InGameState extends BasicGameState {
                     System.out.println("Holding: " + tower.name);
                     holding = tower;
                     holdingTower = true;
+                }else if(hit.contains(x,y) && tower.cost > level.money){
+                        SoundEngine.getInstance().play("no");
+                        return;
                 }
                 xx += 64;
                 //  g.drawImage(nextRound,600,550);
@@ -222,17 +224,23 @@ public class InGameState extends BasicGameState {
             }
         } else {
             //level
-            if (button == 0 && holdingTower && holding != null && holding.cost <= level.money) {
+            if (button == 0 && holdingTower && holding != null ) {
                 System.out.println("Placing");
                 if (y >= 480) return;
                 int tX = x / Level.tileSize;
                 int tY = y / Level.tileSize;
                 Tower tower = Tower.create(tX, tY, holding);// new ToasterTower(tX * Level.tileSize, tY * Level.tileSize);
                 boolean success = level.placeTower(tower);
+                if(holding.cost > level.money){
+                    SoundEngine.getInstance().play("no");
+                    return;
+                }
                 if (success) {
                     holdingTower = false;
                     holding = null;
-                    level.money -= tower.cost;
+                    level.money -= Tower.getCurrentCost(tower);
+                }else{
+                    SoundEngine.getInstance().play("no");
                 }
             }
         }
@@ -250,6 +258,9 @@ public class InGameState extends BasicGameState {
             level.loadFromImg("res/level.png");
         else if (setLevel == 1)
             level.loadFromImg("res/level2.png");
+        else if(setLevel == 2){
+            level.loadFromImg("res/level3.png");
+        }
         //level.entities.add(new BlueEnemy(level.path));
         showingTut = true;
     }

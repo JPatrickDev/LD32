@@ -98,9 +98,9 @@ public class UpgradesState extends BasicGameState {
     }
 
     private void drawTowerInfo(Tower tower, Graphics g) {
-        ttf.drawString(545, 0, "Money: " + parent.money);
+        ttf.drawString(520, 0, "Money: " + parent.money);
 
-        ttf.drawString(545, 30, "Exp Level: " + parent.level);
+        ttf.drawString(520, 30, "Exp Level: " + parent.level);
 
         if (tower == null) return;
         int startX = 210;

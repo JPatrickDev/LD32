@@ -31,6 +31,7 @@ public abstract class Tower extends Entity {
         towers.add(new ToasterTower(-1, -1));
         towers.add(new SpoonTower(-1,-1));
         towers.add(new PenTower(-1,-1));
+        towers.add(new SlowDownTower(-1,-1));
     }
 
     public float cost;
@@ -70,6 +71,9 @@ public abstract class Tower extends Entity {
         else if(holding instanceof PenTower){
             return new PenTower(tX*Level.tileSize,tY*Level.tileSize);
         }
+        else if(holding instanceof SlowDownTower){
+            return new SlowDownTower(tX*Level.tileSize,tY*Level.tileSize);
+        }
         return null;
     }
 
@@ -77,9 +81,16 @@ public abstract class Tower extends Entity {
         System.out.println("Upgrading");
         upgrades.remove(selectedUpgrade);
         selectedUpgrade.apply(this);
-
     }
 
+    public static float getCurrentCost(Tower tower){
+        for(Tower t : towers){
+            if(t.name.equals(tower.name)){
+                return t.cost;
+            }
+        }
+        return 0.0f;
+    }
     public static void setApplied(Upgrade selectedUpgrade,Tower type){
 
         if (keyFound(type.name)) {

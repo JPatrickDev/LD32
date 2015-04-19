@@ -1,6 +1,8 @@
 package me.jack.ld32.Level;
 
 import me.jack.ld32.Entity.Enemy.BlueEnemy;
+import me.jack.ld32.Entity.Enemy.GreenEnemy;
+import me.jack.ld32.Entity.Enemy.PurpleEnemy;
 import me.jack.ld32.Entity.Enemy.RedEnemy;
 import me.jack.ld32.Entity.Entity;
 import me.jack.ld32.Entity.PathFollowingEntity;
@@ -37,7 +39,7 @@ public class Level {
     public int round = 0;
     public int lives = 50;
 
-    public float money = 200.0f;
+    public float money = 400;
     public int exp = 0;
     public int level = 1;
 
@@ -52,6 +54,7 @@ public class Level {
                 }
             }
         }
+
     }
 
     public static int expForLevel(int level) {
@@ -89,8 +92,7 @@ public class Level {
     }
 
     public int calculateEnemies() {
-        int i = round * 2;
-        System.out.println("Round: " + round + " i " + i);
+        int i = 2 * round + 2;
         return i;
     }
 
@@ -125,6 +127,7 @@ public class Level {
             // round++;
             // toSpawn = calculateEnemies();
             state.betweenRounds = true;
+           //startNextRound();
         }
 
         //System.out.println(toSpawn);
@@ -133,13 +136,29 @@ public class Level {
             if (spawnWait > 20 && Math.random() > 0.5) {
                 spawnWait = 0;
                 toSpawn--;
-                if (round >= 5) {
+                if (round >= 5 && round < 12) {
                     if (new Random().nextInt(3) == 0)
                         entities.add(new RedEnemy(path));
                     else
                         entities.add(new BlueEnemy(path));
-                } else {
+                } else if (round < 5) {
                     entities.add(new BlueEnemy(path));
+                } else if (round > 12 && round < 18) {
+                    int ii = new Random().nextInt(5);
+                    if (ii > 4)
+                        entities.add(new RedEnemy(path));
+                    else if (ii == 3)
+                        entities.add(new GreenEnemy(path));
+                    else
+                        entities.add(new BlueEnemy(path));
+                } else {
+                    int ii = new Random().nextInt(6);
+                    if (ii == 3)
+                        entities.add(new GreenEnemy(path));
+                    else if (ii == 5 && InGameState.setLevel != 0)
+                        entities.add(new PurpleEnemy(path));
+                    else
+                        entities.add(new RedEnemy(path));
                 }
 
             }

@@ -1,11 +1,9 @@
 package me.jack.ld32.States;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import uk.co.jdpatrick.JEngine.Sound.SoundEngine;
 
 /**
  * Created by Jack on 19/04/2015.
@@ -20,6 +18,9 @@ public class LevelSelectState extends BasicGameState {
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         menuBg = new Image("res/mainmenu.png");
+        SoundEngine.getInstance().addSound("toaster_shot",new Sound("res/sound/toaster_shot.wav"));
+        SoundEngine.getInstance().addSound("life_lost", new Sound("res/sound/life_lost.wav"));
+        SoundEngine.getInstance().addSound("no",new Sound("res/sound/no.wav"));
     }
 
     @Override
@@ -51,10 +52,13 @@ public class LevelSelectState extends BasicGameState {
             startGame = true;
             game = 0;
         }
-
         if(x > 298 && y > 149 && x < 498 && y < 149+120){
             startGame = true;
             game = 1;
+        }
+        if(x > 514 && y > 149 && x < 714 && y < 149+120){
+            startGame = true;
+            game = 2;
         }
 
     }

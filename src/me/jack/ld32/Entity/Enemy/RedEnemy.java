@@ -35,11 +35,12 @@ public class RedEnemy extends PathFollowingEntity {
     @Override
     public void update(Level level) {
         // System.out.println("Update");
+        // System.out.println("Update");
         if (die || health <= 0) {
             level.removeEntity(this);
             if (health <= 0) {
-                level.money += 25;
-                level.updateExp(20);
+                level.money += 20;
+                level.updateExp(30);
             }
             return;
         }
